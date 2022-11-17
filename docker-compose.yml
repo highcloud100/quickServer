@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  flask_app:
+    build: ./flask
+    container_name: api
+    #depends_on:
+    # - mysql
+    volumes:
+      - ./flask/:/flask
+    restart: always
+    environment:
+      - flask_app=/flask/api/app
+    command: bash -c 'cd /flask/api/ && gunicorn "app:create_app()" --workers 2   --bind 0.0.0.0:5000 --timeout 30' 
+    ports:
+        - "127.0.0.1:5000:5000"
+
+
+  ngnix:
+    build: ./nginx
+    restart: always
+    ports:
+      - "0.0.0.0:80:80"
+    volumes:
+      - ./nginx/:/etc/nginx.conf.d
+      - ./flask/api:/api
+      - ./flask/api/static:/static
+    depends_on:
+      - flask_app
+

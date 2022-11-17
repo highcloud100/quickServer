@@ -1,0 +1,17 @@
+### Flask ###
+instance/*
+!instance/.gitignore
+.webassets-cache
+.env
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+
+# IDE
+.idea
+
+# Env Variables
+*.cmd
+*.sh
