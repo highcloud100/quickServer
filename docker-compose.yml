@@ -20,7 +20,7 @@ services:
     build: ./nginx
     restart: always
     ports:
-      - "0.0.0.0:80:80"
+      - "0.0.0.0:8080:80"
     volumes:
       - ./nginx/:/etc/nginx.conf.d
       - ./flask/api:/api
